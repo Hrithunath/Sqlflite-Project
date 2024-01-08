@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sqlflite/Screens/create.dart';
+import 'package:sqlflite/Screens/Homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: create(),
+      debugShowCheckedModeBanner: false,
+      home: StudentDetails(),
     );
   }
 }
