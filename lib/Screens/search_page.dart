@@ -59,18 +59,17 @@ class _search_pageState extends State<search_page> {
                                       builder: (context) => ViewProfile(
                                           user: _filteredUserList[index]))),
                               leading: CircleAvatar(
-                                backgroundImage: _filteredUserList[index]
-                                                .selectedImage !=
-                                            null &&
-                                        File(_filteredUserList[index]
-                                                .selectedImage!)
-                                            .existsSync()
-                                    ? FileImage(File(_filteredUserList[index]
-                                            .selectedImage!))
-                                        as ImageProvider<Object>?
-                                    : const AssetImage(
-                                        'assets/images/userProfile.png'),
-                              ),
+                                  backgroundImage: _filteredUserList[index]
+                                                  .selectedImage !=
+                                              null &&
+                                          File(_filteredUserList[index]
+                                                  .selectedImage!)
+                                              .existsSync()
+                                      ? FileImage(File(_filteredUserList[index]
+                                              .selectedImage!))
+                                          as ImageProvider<Object>?
+                                      : AssetImage(
+                                          'assets/images/profile.eps')),
                               title: Text(
                                   _filteredUserList[index].name ?? 'No Name'),
                               subtitle: Text(
@@ -97,7 +96,7 @@ class _search_pageState extends State<search_page> {
                                       icon: Icon(Icons.edit)),
                                   IconButton(
                                       onPressed: () {
-                                        DeleteFormShowDialog(context,
+                                        deleteFormShowDialog(context,
                                             _filteredUserList[index].id);
                                       },
                                       icon: Icon(Icons.delete)),
@@ -141,7 +140,7 @@ class _search_pageState extends State<search_page> {
         .showSnackBar(SnackBar(content: Text(message)));
   }
 
-  DeleteFormShowDialog(BuildContext context, userId) {
+  deleteFormShowDialog(BuildContext context, userId) {
     return showDialog(
         context: context,
         builder: (_) {

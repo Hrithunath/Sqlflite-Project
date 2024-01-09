@@ -13,13 +13,13 @@ class update extends StatefulWidget {
 }
 
 class _updateState extends State<update> {
-  final NameController = TextEditingController();
+  final nameController = TextEditingController();
 
   final studyController = TextEditingController();
 
-  final PlaceController = TextEditingController();
+  final placeController = TextEditingController();
 
-  final AdmissionController = TextEditingController();
+  final admissionController = TextEditingController();
 
   final formkey = GlobalKey<FormState>();
 
@@ -29,10 +29,10 @@ class _updateState extends State<update> {
   @override
   void initState() {
     setState(() {
-      NameController.text = widget.user.name ?? '';
+      nameController.text = widget.user.name ?? '';
       studyController.text = widget.user.study ?? '';
-      PlaceController.text = widget.user.place ?? '';
-      AdmissionController.text = widget.user.admission ?? '';
+      placeController.text = widget.user.place ?? '';
+      admissionController.text = widget.user.admission ?? '';
     });
 
     super.initState();
@@ -57,41 +57,43 @@ class _updateState extends State<update> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Add new users',
+                    'Edit user Details',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.grey,
-                    child: imagepath != null
-                        ? ClipOval(
-                            child: Image.file(
-                              imagepath!,
-                              width: 120,
-                              height: 120,
-                              fit: BoxFit.cover,
+                  Center(
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.grey,
+                      child: imagepath != null
+                          ? ClipOval(
+                              child: Image.file(
+                                imagepath!,
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                pickImageFromGallery();
+                              },
+                              icon: Icon(Icons.camera_alt_outlined),
                             ),
-                          )
-                        : IconButton(
-                            onPressed: () {
-                              pickImageFromGallery();
-                            },
-                            icon: Icon(Icons.camera_alt_outlined),
-                          ),
+                    ),
                   ),
                   SizedBox(
                     height: 13,
                   ),
                   TextFormField(
-                    controller: NameController,
+                    controller: nameController,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
-                      label: Text('Name'),
+                      label: Text('name'),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Name is required';
+                        return 'name is required';
                       } else {
                         return null;
                       }
@@ -119,15 +121,15 @@ class _updateState extends State<update> {
                     height: 20,
                   ),
                   TextFormField(
-                    controller: PlaceController,
+                    controller: placeController,
                     keyboardType: TextInputType.streetAddress,
                     decoration: InputDecoration(
-                      label: Text('Place'),
+                      label: Text('place'),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Place is required';
+                        return 'place is required';
                       } else {
                         return null;
                       }
@@ -137,15 +139,15 @@ class _updateState extends State<update> {
                     height: 20,
                   ),
                   TextFormField(
-                    controller: AdmissionController,
+                    controller: admissionController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      label: Text('Admission Number'),
+                      label: Text('admission Number'),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Admission Number is required';
+                        return 'admission Number is required';
                       } else {
                         return null;
                       }
@@ -162,7 +164,7 @@ class _updateState extends State<update> {
                           ),
                           onPressed: () {},
                           child: Text(
-                            'Login',
+                            'Save',
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.bold),
                           )),
@@ -199,20 +201,20 @@ class _updateState extends State<update> {
   }
 
   void forClear() {
-    NameController.text = '';
+    nameController.text = '';
     studyController.text = '';
-    PlaceController.text = '';
-    AdmissionController.text = '';
+    placeController.text = '';
+    admissionController.text = '';
   }
 
-  UpdateDetails() async {
+  updateDetails() async {
     if (formkey.currentState!.validate()) {
       var user = User();
       user.id = widget.user.id;
-      user.name = NameController.text;
+      user.name = nameController.text;
       user.study = studyController.text;
-      user.place = PlaceController.text;
-      user.admission = AdmissionController.text;
+      user.place = placeController.text;
+      user.admission = admissionController.text;
       user.selectedImage = selectedimage;
       var result = await userService.updateUser(user);
       Navigator.pop(context, result);

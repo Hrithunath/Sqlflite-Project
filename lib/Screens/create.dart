@@ -1,6 +1,9 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:sqlflite/Screens/Homepage.dart';
 import 'package:sqlflite/services/userServices.dart';
 import 'package:sqlflite/model/user.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,12 +71,12 @@ class _createState extends State<create> {
                   controller: nameController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
-                    label: Text('Name'),
+                    label: Text('name'),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Name is required';
+                      return 'name is required';
                     } else {
                       return null;
                     }
@@ -104,12 +107,12 @@ class _createState extends State<create> {
                   controller: placeController,
                   keyboardType: TextInputType.streetAddress,
                   decoration: InputDecoration(
-                    label: Text('Place'),
+                    label: Text('place'),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Place is required';
+                      return 'place is required';
                     } else {
                       return null;
                     }
@@ -122,12 +125,12 @@ class _createState extends State<create> {
                   controller: admissionController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text('Admission Number'),
+                    label: Text('admission Number'),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Admission Number is required';
+                      return 'admission Number is required';
                     } else {
                       return null;
                     }
@@ -197,10 +200,13 @@ class _createState extends State<create> {
       user.study = studyController.text;
       user.place = placeController.text;
       user.admission = admissionController.text;
-      user.selectedImage = selectedImage;
+      user.selectedImage = selectedImage ?? ''; // Handle null case
       var result = await userService.saveUser(user);
       if (result != null) {
-        Navigator.pop(context, true);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => StudentDetails()),
+        );
       } else {
         print('error');
       }
