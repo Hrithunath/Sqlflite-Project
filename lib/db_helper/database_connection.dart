@@ -16,7 +16,7 @@ class DatabaseConnnection {
     int version,
   ) async {
     String sql =
-        "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT,Class NUMBER,place TEXT,admission TEXT)";
+        "CREATE TABLE users(id INTEGER PRIMARY KEY,name TEXT,study NUMBER,place TEXT,admission TEXT)";
     await database.execute(sql);
   }
 }

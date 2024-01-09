@@ -23,7 +23,7 @@ class _StudentDetailsState extends State<StudentDetails> {
         var userModel = user();
         userModel.id = user['id'];
         userModel.name = user['name'];
-        userModel.Class = user['Class'];
+        userModel.study = user['study'];
         userModel.place = user['place'];
         userModel.admission = user['admission'];
         userModel.selectedImage = user['selectedImage'];

@@ -39,7 +39,7 @@ class _grid_viewState extends State<grid_view> {
         var userModel = User();
         userModel.id = user['id'];
         userModel.name = user['name'];
-        userModel.Class = user['Class'];
+        userModel.study = user['study'];
         userModel.place = user['place'];
         userModel.admission = user['admission'];
       }).toList();

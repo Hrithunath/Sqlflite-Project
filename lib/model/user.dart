@@ -1,7 +1,7 @@
 class User {
   int? id;
   String? name;
-  String? Class;
+  String? study;
   String? place;
   String? admission;
   String? selectedImage;
@@ -10,7 +10,7 @@ class User {
     var mapping = Map<String, dynamic>();
     mapping['id'] = id ?? null;
     mapping['name'] = name!;
-    mapping['Class'] = Class!;
+    mapping['study'] = study!;
     mapping['place'] = place!;
     mapping['admission'] = admission!;
     mapping['selectedImage'] = selectedImage;

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:sqlflite/Screens/Homepage.dart';
 import 'package:sqlflite/services/userServices.dart';
 import 'package:sqlflite/model/user.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,7 +14,7 @@ class create extends StatefulWidget {
 
 class _createState extends State<create> {
   final NameController = TextEditingController();
-  final ClassController = TextEditingController();
+  final studyController = TextEditingController();
   final PlaceController = TextEditingController();
   final AdmissionController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
@@ -84,15 +83,15 @@ class _createState extends State<create> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: ClassController,
+                  controller: studyController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text('Class'),
+                    label: Text('study'),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Class is required';
+                      return 'study is required';
                     } else {
                       return null;
                     }
@@ -195,16 +194,13 @@ class _createState extends State<create> {
     if (_formkey.currentState!.validate() && selectedImage != null) {
       var user = User();
       user.name = NameController.text;
-      user.Class = ClassController.text;
+      user.study = studyController.text;
       user.place = PlaceController.text;
       user.admission = AdmissionController.text;
       user.selectedImage = selectedImage;
       var result = await userService.saveUser(user);
       if (result != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => StudentDetails()),
-        );
+        Navigator.pop(context, true);
       } else {
         print('error');
       }
@@ -213,7 +209,7 @@ class _createState extends State<create> {
 
   void forclear() {
     NameController.text = '';
-    ClassController.text = '';
+    studyController.text = '';
     PlaceController.text = '';
     AdmissionController.text = '';
   }

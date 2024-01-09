@@ -15,7 +15,7 @@ class update extends StatefulWidget {
 class _updateState extends State<update> {
   final NameController = TextEditingController();
 
-  final ClassController = TextEditingController();
+  final studyController = TextEditingController();
 
   final PlaceController = TextEditingController();
 
@@ -30,7 +30,7 @@ class _updateState extends State<update> {
   void initState() {
     setState(() {
       NameController.text = widget.user.name ?? '';
-      ClassController.text = widget.user.Class ?? '';
+      studyController.text = widget.user.study ?? '';
       PlaceController.text = widget.user.place ?? '';
       AdmissionController.text = widget.user.admission ?? '';
     });
@@ -101,15 +101,15 @@ class _updateState extends State<update> {
                     height: 20,
                   ),
                   TextFormField(
-                    controller: ClassController,
+                    controller: studyController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      label: Text('Class'),
+                      label: Text('study'),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Class is required';
+                        return 'study is required';
                       } else {
                         return null;
                       }
@@ -200,7 +200,7 @@ class _updateState extends State<update> {
 
   void forClear() {
     NameController.text = '';
-    ClassController.text = '';
+    studyController.text = '';
     PlaceController.text = '';
     AdmissionController.text = '';
   }
@@ -210,7 +210,7 @@ class _updateState extends State<update> {
       var user = User();
       user.id = widget.user.id;
       user.name = NameController.text;
-      user.Class = ClassController.text;
+      user.study = studyController.text;
       user.place = PlaceController.text;
       user.admission = AdmissionController.text;
       user.selectedImage = selectedimage;

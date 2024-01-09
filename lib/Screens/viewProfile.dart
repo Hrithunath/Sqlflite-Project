@@ -48,7 +48,7 @@ class ViewProfile extends StatelessWidget {
               ),
             const SizedBox(height: 14),
             _buildDetailRow('Name', user.name ?? ''),
-            _buildDetailRow('Class', user.Class ?? ''),
+            _buildDetailRow('study', user.study ?? ''),
             _buildDetailRow('Age', user.place ?? ''),
             _buildDetailRow('Blood', user.admission ?? ''),
             const SizedBox(height: 20),
