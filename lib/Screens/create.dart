@@ -13,10 +13,10 @@ class create extends StatefulWidget {
 }
 
 class _createState extends State<create> {
-  final NameController = TextEditingController();
+  final nameController = TextEditingController();
   final studyController = TextEditingController();
-  final PlaceController = TextEditingController();
-  final AdmissionController = TextEditingController();
+  final placeController = TextEditingController();
+  final admissionController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   var userService = UserServices();
   File? imagepath;
@@ -65,7 +65,7 @@ class _createState extends State<create> {
                 ),
                 SizedBox(height: 13),
                 TextFormField(
-                  controller: NameController,
+                  controller: nameController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     label: Text('Name'),
@@ -101,7 +101,7 @@ class _createState extends State<create> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: PlaceController,
+                  controller: placeController,
                   keyboardType: TextInputType.streetAddress,
                   decoration: InputDecoration(
                     label: Text('Place'),
@@ -119,7 +119,7 @@ class _createState extends State<create> {
                   height: 20,
                 ),
                 TextFormField(
-                  controller: AdmissionController,
+                  controller: admissionController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text('Admission Number'),
@@ -193,10 +193,10 @@ class _createState extends State<create> {
   void saveData() async {
     if (_formkey.currentState!.validate() && selectedImage != null) {
       var user = User();
-      user.name = NameController.text;
+      user.name = nameController.text;
       user.study = studyController.text;
-      user.place = PlaceController.text;
-      user.admission = AdmissionController.text;
+      user.place = placeController.text;
+      user.admission = admissionController.text;
       user.selectedImage = selectedImage;
       var result = await userService.saveUser(user);
       if (result != null) {
@@ -208,9 +208,9 @@ class _createState extends State<create> {
   }
 
   void forclear() {
-    NameController.text = '';
+    nameController.text = '';
     studyController.text = '';
-    PlaceController.text = '';
-    AdmissionController.text = '';
+    placeController.text = '';
+    admissionController.text = '';
   }
 }
